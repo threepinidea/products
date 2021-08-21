@@ -1,5 +1,12 @@
-
+# 讀取檔案
 products = []
+with open('products.csv', 'r', encoding='utf-8') as f: # 用讀取模式開啟 products.csv檔案 另外取名為 f
+    for line in f:
+        name, price = line.strip().split(',') # 用 strip來除掉換行符號 並用split切割條件為 , - split切割完的結果是清單 左邊為name 右邊為價格
+        products.append([name, price]) # 新增 商品名稱與價格的清單到 products清單裡
+print(products)
+
+#　讓使用者輸入
 while True: # 在不確定重複執行幾次狀況下用 while
     name = input('輸入商品名稱:') # 讓使用者輸入商品名稱 用 name變數裝
     if name == 'q': # 如果 name 等於字串 q
@@ -8,6 +15,7 @@ while True: # 在不確定重複執行幾次狀況下用 while
     products.append([name, price]) # 新增 商品名稱與價格的清單到 products清單裡
 print(products)
 
+# 印出所有購買紀錄
 for p in products: # 用for迴圈逐一取出 products中的小清單 p
     print(p[0], '的價格是', p[1]) # 印出小清單 p中商品名稱 p[0]和商品價格 p[1]
 
