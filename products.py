@@ -1,10 +1,16 @@
+import os # 載入作業系統模組
+
 # 讀取檔案
 products = []
-with open('products.csv', 'r', encoding='utf-8') as f: # 用讀取模式開啟 products.csv檔案 另外取名為 f
-    for line in f:
-        name, price = line.strip().split(',') # 用 strip來除掉換行符號 並用split切割條件為 , - split切割完的結果是清單 左邊為name 右邊為價格
-        products.append([name, price]) # 新增 商品名稱與價格的清單到 products清單裡
-print(products)
+if os.path.isfile('products.csv'): # 檢查檔案 - 如果作業系統的 path路徑模組的 isfile檢查檔案功能 - products.csv有沒有在電腦裡面 
+    print('有')
+    with open('products.csv', 'r', encoding='utf-8') as f: # 用讀取模式開啟 products.csv檔案 另外取名為 f
+        for line in f:
+            name, price = line.strip().split(',') # 用 strip來除掉換行符號 並用split切割條件為 , - split切割完的結果是清單 左邊為name 右邊為價格
+            products.append([name, price]) # 新增 商品名稱與價格的清單到 products清單裡
+    print(products)
+else:
+    print('找不到檔案')
 
 #　讓使用者輸入
 while True: # 在不確定重複執行幾次狀況下用 while
@@ -19,6 +25,7 @@ print(products)
 for p in products: # 用for迴圈逐一取出 products中的小清單 p
     print(p[0], '的價格是', p[1]) # 印出小清單 p中商品名稱 p[0]和商品價格 p[1]
 
+# 寫入檔案
 with open('products.csv', 'w', encoding='utf-8') as f: # 用寫入模式打開products.csv檔案並指定編碼為utf-8 另取名當作 f
     f.write('商品,價格\n')
     for p in products: # p 從 products
